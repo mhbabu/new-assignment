@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,11 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/login', function () {
     return auth()->id() ? redirect('dashboard') : redirect('login');
 });
 
 Auth::routes();
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::resource('/blogs', BlogController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('blogs', BlogController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+});
