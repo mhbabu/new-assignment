@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index(){
         
-        $data['posts'] = Blog::latest()->paginate(10);
+        $data['posts'] = Blog::latest()->paginate(3);
         return view("frontend.index", $data);
     }
 }

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('post/details/{blog}', [HomeController::class, 'index'])->name('post.details');
 
 Route::get('/login', function () {
     return auth()->id() ? redirect('dashboard') : redirect('login');

@@ -25,7 +25,7 @@ class UpdateBlogRequest extends FormRequest
     {
         return [
             'title'   => ['bail', 'required', 'string', 'max:255', 'unique:blogs,title,' . $this->blog->id],
-            'details' => 'required'
+            'details' => ['bail', 'required', 'min:200']
         ];    
     }
 }

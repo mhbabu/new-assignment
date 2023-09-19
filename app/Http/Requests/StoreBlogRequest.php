@@ -25,7 +25,7 @@ class StoreBlogRequest extends FormRequest
     {
         return [
             'title'   => ['bail', 'unique:blogs', 'required', 'string', 'max:255'],
-            'details' => 'required'
+            'details' => ['bail', 'required', 'min:200']
         ];    
     }
 }
