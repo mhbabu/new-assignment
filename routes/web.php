@@ -30,6 +30,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('blogs/{blog}/delete', [BlogController::class, 'delete'])->name('blogs.delete');
     Route::resource('blogs', BlogController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::post('post/{blogId}/comments', [CommentController::class, 'comment'])->name('post.comments');
 });

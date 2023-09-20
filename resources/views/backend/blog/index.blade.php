@@ -32,7 +32,7 @@
                                             <td>
                                                 <a class="btn btn-primary btn-sm"
                                                     href="{{ route('blogs.edit', $blog->id) }}" title="Edit">Edit</a>
-                                                <a class="btn btn-danger btn-sm" href="" title="Delete">Delete</a>
+                                                <a href={{ route('blogs.delete', $blog->id) }} onclick="return confirm('Are you sure want to delete this record?')" class="btn btn-danger btn-sm" href="" title="Delete">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
