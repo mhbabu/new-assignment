@@ -5,13 +5,21 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use Illuminate\Support\Str;
 use App\Models\Blog;
 
 class BlogController extends Controller
 {
     public function index(){
 
-        $data['blogs'] = Blog::where('created_by', auth()->id())->paginate(10);
+        $query = Blog::query();
+
+        // User ID - 1 is the System Admin who can see all the blogs. Otherwise users can see only their blogs.
+        if(auth()->id() != 1) 
+            $query->where('created_by', auth()->id());
+        
+        $data['blogs'] = $query->latest()->paginate(9);    
+
         return view("backend.blog.index", $data);
     }
 
@@ -22,7 +30,9 @@ class BlogController extends Controller
 
     public function store(StoreBlogRequest $request){
 
-        Blog::create($request->validated());
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+        Blog::create($data);
         return redirect()->route('blogs.index')->with('success', 'Blog created successfully.');
     }
 

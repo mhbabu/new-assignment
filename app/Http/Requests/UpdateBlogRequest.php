@@ -24,6 +24,7 @@ class UpdateBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'slug'    => 'nullable',
             'title'   => ['bail', 'required', 'string', 'max:255', 'unique:blogs,title,' . $this->blog->id],
             'details' => ['bail', 'required', 'min:200']
         ];    
