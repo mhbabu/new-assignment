@@ -10,7 +10,7 @@
                         <h2>{{ $post->title ?? '' }}</h2>
                         <p>{{ Str::limit($post->details, 190, '...') }}</p>
                         <p>
-                            <a class="btn btn-secondary" href="{{ route('post.details', $post->id) }}" role="button">Details &raquo;</a>
+                            <a class="btn btn-secondary" href="{{ route('post.details', $post->slug) }}" role="button">Details &raquo;</a>
                         </p>
                     </div>
                 @endforeach
