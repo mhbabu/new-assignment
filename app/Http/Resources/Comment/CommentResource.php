@@ -22,7 +22,12 @@ class CommentResource extends JsonResource
             'created_at' => $this->updated_at,
             'updated_at' => $this->updated_at,
             'user'       => new UserResource($this->user),
-            'post'       => new BlogResource($this->blog)
+            'post'       => [
+                'id'      => $this->blog->id,
+                'slug'    => $this->blog->slug,
+                'title'   => $this->blog->title,
+                'details' => $this->blog->details
+            ]
         ];
     }
 }

@@ -16,7 +16,7 @@ class CommentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'blog_id' => 'bail|required|exists:blogs,id',
-            'comment' => 'bail|required|string|max:255'
+            'comment' => 'bail|required|string|min:5'
         ],[],[
             'blog_id' => 'post'
         ]);
