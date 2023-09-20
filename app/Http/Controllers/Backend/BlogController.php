@@ -12,10 +12,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-
         $query = Blog::query();
 
-        // User ID - 1 is the System Admin who can see all the blogs. Otherwise users can see only their blogs.
+        // User ID - 1 is the System Admin who can see all the blogs. Otherwise users can see only their creating blogs.
         if (auth()->id() != 1)
             $query->where('created_by', auth()->id());
 
@@ -47,7 +46,6 @@ class BlogController extends Controller
 
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-
         $data = $request->validated();
         $data['slug'] = Str::slug($data['title']);
         Blog::find($blog->id)->update($data);
