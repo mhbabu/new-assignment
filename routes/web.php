@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('post/details/{blog}', [PostController::class, 'postdetails'])->name('post.details');
+Route::get('post/details/{slug}', [PostController::class, 'postdetails'])->name('post.details');
 
-Route::get('/login', function () {
+Route::get('login', function () {
     return auth()->id() ? redirect('dashboard') : redirect('login');
 });
 

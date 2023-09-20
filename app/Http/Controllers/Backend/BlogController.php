@@ -37,7 +37,6 @@ class BlogController extends Controller
     }
 
     public function edit(Blog $blog){
-
         $data['blog'] = $blog;
         return view("backend.blog.edit", $data);
     }

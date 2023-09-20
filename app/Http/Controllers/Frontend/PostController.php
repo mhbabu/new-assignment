@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function postdetails(Blog $blog){
-        $data['post'] = $blog->with('user')->first();
-        $data['comments'] = Comment::where('blog_id', $blog->id)->paginate(5);
+    public function postdetails($slug){
+        $data['post'] = Blog::where('slug', $slug)->with('user')->first();
+        $data['comments'] = Comment::where('blog_id', $data['post']->id)->paginate(5);
         return view("frontend.post-details", $data);
     }
 }

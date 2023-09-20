@@ -22,11 +22,6 @@ class Blog extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     public static function boot()
     {
         parent::boot();
