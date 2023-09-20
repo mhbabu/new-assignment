@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,8 @@ Route::prefix('user')->group(function () {
 Route::prefix('auth-user')->middleware('auth:sanctum')->group( function () {
     Route::get('list', [AuthController::class, 'userList']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::apiResource('blogs', BlogController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::apiResource('blogs', BlogController::class)->only(['index', 'store', 'show', 'update','destroy']);
+    Route::post('post/comments', [CommentController::class, 'comment']);
 
     
 });
