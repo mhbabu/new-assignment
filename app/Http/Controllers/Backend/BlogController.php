@@ -44,7 +44,9 @@ class BlogController extends Controller
 
     public function update(UpdateBlogRequest $request, Blog $blog){
 
-        Blog::find($blog->id)->update($request->validated());
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+        Blog::find($blog->id)->update($data);
         return redirect()->route('blogs.index')->with('success', 'Blog updated successfully.');
     }
 }
