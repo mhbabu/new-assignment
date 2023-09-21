@@ -7,6 +7,7 @@ use App\Http\Requests\Blog\StoreBlogRequest;
 use App\Http\Requests\Blog\UpdateBlogRequest;
 use Illuminate\Support\Str;
 use App\Models\Blog;
+use Brian2694\Toastr\Facades\Toastr;
 
 class BlogController extends Controller
 {
@@ -31,11 +32,11 @@ class BlogController extends Controller
 
     public function store(StoreBlogRequest $request)
     {
-
         $data = $request->validated();
         $data['slug'] = Str::slug($data['title']);
         Blog::create($data);
-        return redirect()->route('blogs.index')->with('success', 'Blog created successfully.');
+        Toastr::success('Blog created successfully');
+        return redirect()->route('blogs.index');
     }
 
     public function edit(Blog $blog)
@@ -49,12 +50,14 @@ class BlogController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['title']);
         Blog::find($blog->id)->update($data);
-        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully.');
+        Toastr::success('Blog updated successfully');
+        return redirect()->route('blogs.index');
     }
 
     public function delete(Blog $blog)
     {
         $blog->delete();
-        return back()->with('success', 'Blog deleted successfully.');
+        Toastr::success('Blog deleted successfully');
+        return back();
     }
 }

@@ -6,7 +6,10 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
+                'resources/css/toastr.min.css',
                 'resources/js/app.js',
+                'resources/js/jquery.min.js',
+                'resources/js/toastr.min.js',
             ],
             refresh: true,
         }),

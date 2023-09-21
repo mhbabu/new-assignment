@@ -14,6 +14,10 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss'])
+    {!! Html::style('css/toastr.min.css') !!}
+
+    @yield('header-css')
+
 </head>
 <body>
     <div id="app">
@@ -24,4 +28,9 @@
     </div>
 </body>
 @vite(['resources/js/app.js'])
+{!! Html::script('js/jquery.min.js') !!}
+{!! Html::script('js/toastr.min.js') !!}
+{!! Toastr::message() !!}
+
+@yield('footer-script')
 </html>
