@@ -14,6 +14,7 @@
   - I also intregrated all the API in this project.
   - API collection routes are inside of POSTMAN API COLLECTION folder of the project
   - Without writing test all the requeirments are done.
+  - UserTableSeeder, UserTableFaker and BlogTableFacker implemented
 
 # Login Credentials
     - Email : admin@admin@gmail.com - for system admin who can see and delete all the data 
