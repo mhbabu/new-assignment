@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\BlogListDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Blog\StoreBlogRequest;
 use App\Http\Requests\Blog\UpdateBlogRequest;
@@ -11,17 +12,9 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(BlogListDataTable $blogListDataTable)
     {
-        $query = Blog::query();
-
-        // User ID - 1 is the System Admin who can see all the blogs. Otherwise users can see only their creating blogs.
-        if (auth()->id() != 1)
-            $query->where('created_by', auth()->id());
-
-        $data['blogs'] = $query->latest()->paginate(9);
-
-        return view("backend.blog.index", $data);
+        return $blogListDataTable->render("backend.blog.index");
     }
 
     public function create()
